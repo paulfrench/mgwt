@@ -1,4 +1,8 @@
-@if user.agent ie9 ie10 {
+@if mgwt.css pretty {
+  @external display, displayContainer, in, out, slide, flip, reverse, pop, slideup, fade, dissolve;
+}
+
+@if user.agent ie9 {
 	.displayContainer {
  		position: absolute;
 		width: 100%;

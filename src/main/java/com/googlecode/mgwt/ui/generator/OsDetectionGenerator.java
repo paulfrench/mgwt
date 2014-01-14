@@ -103,7 +103,7 @@ public class OsDetectionGenerator extends Generator {
 		writer.println("}");
 
 		writer.println("public boolean isPhone() {");
-		writer.println("return isIPhone() || isAndroidPhone() || isBlackBerry();");
+    writer.println("return isIPhone() || isAndroidPhone() || isBlackBerry() || isWindowsPhone();");
 		writer.println("}");
 
 		writer.println("public boolean isAndroidTablet() {");
@@ -121,6 +121,10 @@ public class OsDetectionGenerator extends Generator {
 		writer.println("public boolean isIPadRetina() {");
 		writer.println("return " + mgwtProperty.equals("ipad_retina") + ";");
 		writer.println("}");
+
+    writer.println("public boolean isWindowsPhone() {");
+    writer.println("return " + mgwtProperty.equals("windows_phone") + ";");
+    writer.println("}");
 
 		writer.commit(logger);
 

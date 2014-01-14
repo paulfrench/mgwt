@@ -39,7 +39,7 @@ public class MostRecentTabBarButton extends TabBarButton {
    * @param css the css to use
    */
 	public MostRecentTabBarButton(TabBarCss css) {
-		super(css, MGWT.getOsDetection().isIOs() || MGWT.getOsDetection().isDesktop() ? MGWTStyle.getTheme().getMGWTClientBundle().tabBarMostRecentImage() : null);
+    super(css, MGWT.getOsDetection().isIOs() || MGWT.getOsDetection().isDesktop() || MGWT.getOsDetection().isWindowsPhone() ? MGWTStyle.getTheme().getMGWTClientBundle().tabBarMostRecentImage() : null);
 		setText("Most Recent");
 	}
 

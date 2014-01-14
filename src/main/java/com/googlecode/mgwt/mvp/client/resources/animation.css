@@ -13,6 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+ 
+@if mgwt.css pretty {
+  @external display, displayContainer, in, out, slide, flip, reverse, pop, slideup, fade, dissolve;
+}
 
 @if user.agent safari {
 

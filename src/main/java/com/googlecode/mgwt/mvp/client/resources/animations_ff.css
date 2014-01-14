@@ -1,3 +1,6 @@
+@if mgwt.css pretty {
+  @external display, displayContainer, in, out, slide, flip, reverse, pop, slideup, fade, dissolve;
+}
 
 @if user.agent gecko1_8 {
 

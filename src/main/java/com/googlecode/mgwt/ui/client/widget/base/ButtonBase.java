@@ -14,6 +14,7 @@
 package com.googlecode.mgwt.ui.client.widget.base;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HasText;
@@ -35,6 +36,9 @@ import com.googlecode.mgwt.ui.client.widget.touch.TouchWidget;
  * @version $Id: $
  */
 public abstract class ButtonBase extends TouchWidget implements HasText {
+
+  private boolean eventPreventPropagation = true;
+  private boolean eventPreventDefault = true;
 
   /**
    * Construct a base button with a given css
@@ -62,36 +66,32 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
 
       @Override
       public void onTouchCanceled(TouchCancelEvent event) {
-        event.stopPropagation();
-        event.preventDefault();
+        applyEventPropagationSettings(event);
         removeStyleName(active);
-        if (MGWT.getOsDetection().isDesktop()) {
+        if (!MGWT.getOsDetection().isIOs()) {
           DOM.releaseCapture(getElement());
         }
       }
 
       @Override
       public void onTouchEnd(TouchEndEvent event) {
-        event.stopPropagation();
-        event.preventDefault();
+        applyEventPropagationSettings(event);
         removeStyleName(active);
-        if (MGWT.getOsDetection().isDesktop()) {
+        if (!MGWT.getOsDetection().isIOs()) {
           DOM.releaseCapture(getElement());
         }
       }
 
       @Override
       public void onTouchMove(TouchMoveEvent event) {
-        event.preventDefault();
-        event.stopPropagation();
+        applyEventPropagationSettings(event);
       }
 
       @Override
       public void onTouchStart(TouchStartEvent event) {
-        event.stopPropagation();
-        event.preventDefault();
+        applyEventPropagationSettings(event);
         addStyleName(active);
-        if (MGWT.getOsDetection().isDesktop()) {
+        if (!MGWT.getOsDetection().isIOs()) {
           DOM.setCapture(getElement());
         }
 
@@ -103,7 +103,6 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
       @Override
       public void onTap(TapEvent event) {
         removeStyleName(active);
-
       }
     });
 
@@ -145,4 +144,34 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
     return super.addTapHandler(handler);
   }
 
+  /**
+   * Touch start, touch move, touch cancel and touch end are propagated to the parent element
+   * when eventPreventPropagation == false. This widget starts to receive all events when
+   * touch start is raised and will continue to receive touch events until touch
+   * end is raised regardless where the finger/pointer finishes up on the device screen.
+   * The default is true, touch events are not propagated. If a Tap event
+   * is raised then this is propagated regardless.
+   * @param eventPropagation
+   */
+  public void setTouchEventsPreventPropagation(boolean eventPreventPropagation) {
+    this.eventPreventPropagation = eventPreventPropagation;
+  }
+
+  /**
+   * Sets whether the default browser behaviour of the touch events captured by this widget
+   * are prevented. The default is true.
+   * @param eventPreventDefault
+   */
+  public void setTouchEventsPreventDefault(boolean eventPreventDefault) {
+    this.eventPreventDefault = eventPreventDefault;
+  }
+
+  private void applyEventPropagationSettings(DomEvent<?> event) {
+    if (eventPreventPropagation) {
+      event.stopPropagation();
+    }
+    if (eventPreventDefault) {
+      event.preventDefault();
+    }
+  }
 }

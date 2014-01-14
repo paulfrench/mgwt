@@ -65,6 +65,62 @@
 		}
 }
 
+@if user.agent ie10 {
+  
+  .mgwt-ProgressIndicator {
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: progressIndicatorAnimation;  
+  }
+  
+
+  @keyframes progressIndicatorAnimation {
+  
+        0% { transform: rotate(0deg); }
+        8.2% { transform: rotate(0deg); }
+        
+        8.3% { transform: rotate(30deg); }
+        16.5% { transform: rotate(30deg); }
+        
+        16.6% { transform: rotate(60deg); }
+        24.9% { transform: rotate(60deg); }
+        
+        25% { transform: rotate(90deg); }
+        33.2% { transform: rotate(90deg); }
+        
+        33.3% { transform: rotate(120deg); }
+        41.5% { transform: rotate(120deg); }
+        
+        41.6% { transform: rotate(150deg); }
+        49.9% { transform: rotate(150deg); }
+        
+        50% { transform: rotate(180deg); }
+        58.2% { transform: rotate(180deg); }
+        
+        58.3% { transform: rotate(210deg); }
+        66.5% { transform: rotate(210deg); }
+        
+        66.6% { transform: rotate(240deg); }
+        74.9% { transform: rotate(240deg); }
+        
+        75% { transform: rotate(270deg); }
+        83.2% { transform: rotate(270deg); }
+        
+        83.3% { transform: rotate(300deg); }
+        91.5% { transform: rotate(300deg); }
+        
+        91.6% { transform: rotate(330deg); }
+        99.90% { transform: rotate(330deg); }
+        
+        99.91% { transform: rotate(360deg); }
+        100% { transform: rotate(360deg); }
+    
+      
+  
+    }
+}
+
 @if user.agent gecko1_8 {
 
 		.mgwt-ProgressIndicator {

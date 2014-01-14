@@ -27,6 +27,9 @@ public class MobileUserAgentProvider extends PropertyProviderBaseImpl {
 		if (ua.contains("ipad")) {
 			return "mobilesafari";
 		}
+    if (ua.contains("windows phone")) {
+      return "mobilesafari";
+    }
 		if (ua.contains("blackberry")) {
 			return "not_mobile";
 		}

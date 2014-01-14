@@ -41,6 +41,12 @@
 	}
 }
 
+@if user.agent ie10 {
+  .mgwt-FormList-Element{
+    display: -ms-flexbox;
+  }
+}
+
 @if user.agent gecko1_8 {
 	.mgwt-FormList-Element{
 		width: 100%;
@@ -59,6 +65,12 @@
 	.mgwt-FormList-Element-label{
 		width: 30%;
 	}
+}
+
+@if user.agent ie10 {
+  .mgwt-FormList-Element-label{
+    width: 30%;
+  }
 }
 
 @if user.agent gecko1_8 {
@@ -81,6 +93,14 @@
 	}
 }
 
+@if user.agent ie10 {
+  .mgwt-FormList-Element-container{
+    \-ms-flex: 1;
+    \-ms-flex-pack: end;
+    display: -ms-flexbox;
+  }
+}
+
 @if user.agent gecko1_8 {
 	.mgwt-FormList-Element-container{
 		\-moz-box-flex: 1;
@@ -89,11 +109,12 @@
 	}
 }
 
- 
+.mgwt-List-canbeSelected{
+}
 
 
 /* other browsers */
-@if user.agent ie6 ie8 ie9 ie10 gecko opera {
+@if user.agent ie6 ie8 ie9 gecko opera {
 	.mgwt-List-selected {
 		
 	}

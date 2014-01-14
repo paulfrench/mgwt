@@ -13,6 +13,13 @@
 	}
 }
 
+@if user.agent ie10 {
+  .mgwt-Carousel {
+    display: \-ms-flexbox;
+    \-ms-flex: 1;
+  }
+}
+
 @if user.agent gecko1_8 {
 	.mgwt-Carousel {
 		display: \-moz-box;
@@ -30,6 +37,12 @@
 	}
 }
 
+@if user.agent ie10 {
+  .mgwt-Carousel-Scroller {
+    \-ms-flex: 1;
+  }
+}
+
 @if user.agent gecko1_8 {
 	.mgwt-Carousel-Scroller {
 		\-moz-box-flex: 1;
@@ -45,6 +58,13 @@
 		display: \-webkit-box;
 		\-webkit-box-flex: 1;
 	}
+}
+
+@if user.agent ie10 {
+  .mgwt-Carousel-Container {
+    display: \-ms-flexbox;
+    \-ms-flex: 1;
+  }
 }
 
 @if user.agent gecko1_8 {
@@ -66,6 +86,13 @@
 		display: \-webkit-box;
 		\-webkit-box-pack: center;
 	}
+}
+
+@if user.agent ie10 {
+  .mgwt-Carousel-Indicator-Container {
+    display: \-ms-flexbox;
+    \-ms-flex-pack: center;
+  }
 }
 
 @if user.agent gecko1_8 {
@@ -95,6 +122,12 @@
 	.mgwt-Carousel-Holder {
 		display: \-webkit-box;
 	}
+}
+
+@if user.agent ie10 {
+  .mgwt-Carousel-Holder {
+    display: \-ms-flexbox;
+  }
 }
 
 @if user.agent gecko1_8 {

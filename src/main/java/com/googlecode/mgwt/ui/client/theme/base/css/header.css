@@ -37,6 +37,11 @@
 	}
 }
 
+@if user.agent ie10 {
+  .mgwt-HeaderButton {
+  }
+}
+
 @if user.agent gecko1_8 {
 	.mgwt-HeaderButton {
 		\-moz-appearance: none;
@@ -66,6 +71,13 @@
 	}
 }
 
+@if user.agent ie10 {
+  .mgwt-HeaderButton-text {
+    border-radius: 4px;
+    background-origin: border-box;
+  }
+}
+
 @if user.agent gecko1_8 {
 	.mgwt-HeaderButton-text {
 		\-moz-border-radius: 4px;
@@ -74,7 +86,7 @@
 	}
 }
 
-@if user.agent ie9 ie10 {
+@if user.agent ie9 {
 	.mgwt-HeaderButton-text {
 		border-radius: 4px;
 		background-origin: border-box;
@@ -85,7 +97,7 @@
 	border-left: none;
 }
 
-@if user.agent ie9 ie10 {
+@if user.agent ie9 {
 	.mgwt-HeaderButton-back .mgwt-HeaderButton-text {
 		border: 1px solid rgba(0, 0, 0, 0.5);
 	}
@@ -103,6 +115,12 @@
 	.mgwt-HeaderButton-back .mgwt-HeaderButton-border-container {
 		\-webkit-transform: rotate(54deg);
 	}
+}
+
+@if user.agent ie10 {
+  .mgwt-HeaderButton-back .mgwt-HeaderButton-border-container {
+    transform: rotate(54deg);
+  }
 }
 
 @if user.agent gecko1_8 {
@@ -128,9 +146,15 @@
 @if user.agent safari {
 	.mgwt-HeaderButton-back .mgwt-HeaderButton-border-content {
 		\-webkit-transform: skew(15deg);
-		\-webkit-border-radius: 2px;
 		\-webkit-border-radius: 4px;
 	}
+}
+
+@if user.agent ie10 {
+  .mgwt-HeaderButton-back .mgwt-HeaderButton-border-content {
+    transform: skew(15deg);
+    border-radius: 4px;
+  }
 }
 
 @if user.agent gecko1_8 {
@@ -158,13 +182,19 @@
 	}
 }
 
+@if user.agent ie10 {
+  .mgwt-HeaderButton-forward .mgwt-HeaderButton-border-container {
+    transform: rotate(51deg);
+  }
+}
+
 @if user.agent gecko1_8 {
 	.mgwt-HeaderButton-forward .mgwt-HeaderButton-border-container {
 		\-moz-transform: rotate(51deg);
 	}
 }
 
-@if user.agent ie9 ie10 {
+@if user.agent ie9 {
 	.mgwt-HeaderButton-forward .mgwt-HeaderButton-border-container {
 		
 	}
@@ -181,13 +211,10 @@
 /**
 
 	DROP DOWN MENU
-	only IOS right now
+	only IOS and IE10 right now
 */
 .mgwt-DropDownMenu {
 	width: 300px;
-	\-webkit-padding-start: 0px;
-	\-webkit-border-radius: 10px;
-	\-webkit-box-shadow: 2px 2px 10px #000000;
 	background-color: #131b2f;
 	border: solid 2px #4f4f4f;
 	margin: 0px;
@@ -197,17 +224,44 @@
 	position: absolute;
 }
 
+@if user.agent safari {
+	.mgwt-DropDownMenu {
+		\-webkit-padding-start: 0px;
+		\-webkit-border-radius: 10px;
+		\-webkit-box-shadow: 2px 2px 10px #000000;
+	}
+}
+
+@if user.agent ie10 {
+  .mgwt-DropDownMenu {
+    padding-left: 0px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px #000000;
+  }
+}
+
 .mgwt-DropDownMenu-content {
-	display: -webkit-box;
-	\-webkit-box-orient: vertical;
 	width: 100%;
 	height: 100%;
+}
+
+@if user.agent safari {
+	.mgwt-DropDownMenu-content {
+		display: -webkit-box;
+		\-webkit-box-orient: vertical;
+	}
+}
+
+@if user.agent ie10 {
+  .mgwt-DropDownMenu-content {
+    display: -ms-flexbox;
+    \-ms-flex-direction: column;
+  }
 }
 
 .mgwt-DropDownMenu-arrow {
 	background-color: #ffffff;
 	margin: 0px 5px 5px 5px !important;
-	\-webkit-border-radius: 5px;
 	position: absolute;
 	top: -15px;
 	left: 3px;
@@ -217,54 +271,117 @@
 	border-bottom: none;
 	border-right: none;
 	background-color: #7d828c;
-	\-webkit-transform: rotate(45deg);
-	\-webkit-mask-image: literal('-webkit-gradient(linear, left top, right bottom, from(#000000), color-stop(0.5, #000000), color-stop(0.5, transparent), to(transparent) )');
+}
+
+@if user.agent safari {
+  .mgwt-DropDownMenu-arrow {
+    \-webkit-border-radius: 5px;
+    \-webkit-transform: rotate(45deg);
+    \-webkit-mask-image: literal('-webkit-gradient(linear, left top, right bottom, from(#000000), color-stop(0.5, #000000), color-stop(0.5, transparent), to(transparent) )');
+  }
+}
+
+@if user.agent ie10 {
+	.mgwt-DropDownMenu-arrow {
+		border-radius: 5px;
+		transform: rotate(45deg);
+	}
 }
 
 .mgwt-DropDownMenu .mgwt-HeaderPanel {
 	padding: 0px 10px;
 	height: 40px;
-	\-webkit-border-top-left-radius: 8px;
-	\-webkit-border-top-right-radius: 8px;
-	background-image: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#7e838d), color-stop(0.5, #303648), color-stop(0.5, #121b2e), to(#131b2f) )');
 	position: relative;
 	border-bottom: 0;
+}
+
+@if user.agent safari {
+	.mgwt-DropDownMenu .mgwt-HeaderPanel {
+		\-webkit-border-top-left-radius: 8px;
+		\-webkit-border-top-right-radius: 8px;
+		background-image: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#7e838d), color-stop(0.5, #303648), color-stop(0.5, #121b2e), to(#131b2f) )');
+	}
+}
+
+@if user.agent ie10 {
+  .mgwt-DropDownMenu .mgwt-HeaderPanel {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-image: linear-gradient(to bottom, #7e838d, #303648 50%, #121b2e 50%, #131b2f);
+  }
 }
 
 .mgwt-DropDownMenu .mgwt-HeaderPanel .mgwt-HeaderPanel-center {
 	color: white;
 }
 
-.mgwt-DropDownMenu .mgwt-HeaderButton-back .mgwt-HeaderButton-border-content {
-	background-image: literal('-webkit-gradient(linear, left top, right bottom, from(#7d828c),color-stop(0.5, #303749), color-stop(0.5, #121a2e), to(#121a2e))');
+@if user.agent safari {
+	.mgwt-DropDownMenu .mgwt-HeaderButton-back .mgwt-HeaderButton-border-content {
+	  background-image: literal('-webkit-gradient(linear, left top, right bottom, from(#7d828c),color-stop(0.5, #303749), color-stop(0.5, #121a2e), to(#121a2e))');
+	}
+}
+
+@if user.agent ie10 {
+  .mgwt-DropDownMenu .mgwt-HeaderButton-back .mgwt-HeaderButton-border-content {
+	  background-image: linear-gradient(to bottom, #7d828c, #303749 50%, #121a2e 50%, #121a2e);
+	}
 }
 
 .mgwt-DropDownMenu .mgwt-HeaderButton {
 	color: #ffffff;
 	text-decoration: none;
 	display: inline-block;
-	/*padding: 4px 10px;*/
-	\-webkit-border-radius: 5px;
 	margin-top: 6px;
 	border: solid 1px rgba(79, 79, 79, 0.75);
-	\-webkit-box-shadow: none;
 }
 
-.mgwt-DropDownMenu .mgwt-HeaderButton .mgwt-HeaderButton-text {
-	background-image: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#7d828c),color-stop(0.5, #303749), color-stop(0.5, #121a2e), to(#121a2e))');
+@if user.agent safari {
+	.mgwt-DropDownMenu .mgwt-HeaderButton {
+		\-webkit-border-radius: 5px;
+		\-webkit-box-shadow: none;
+	}
 }
 
-.mgwt-DropDownMenu .mgwt-HeaderButton-active .mgwt-HeaderButton-text {
-	background-image: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#5e636d), color-stop(0.5, #101628), color-stop(0.5, #00000e), to(#00000f) )');
+@if user.agent ie10 {
+  .mgwt-DropDownMenu .mgwt-HeaderButton {
+    border-radius: 5px;
+    box-shadow: none;
+  }
 }
 
-.mgwt-DropDownMenu .mgwt-HeaderButton-active .mgwt-HeaderButton-border-content {
-	background-image: literal('-webkit-gradient(linear, left top, right bottom, from(#5d626c),color-stop(0.5, #101729), color-stop(0.5, #00000e), to(#00000e))');
-	background-origin: border-box;
+@if user.agent safari {
+  .mgwt-DropDownMenu .mgwt-HeaderButton .mgwt-HeaderButton-text {
+    background-image: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#7d828c),color-stop(0.5, #303749), color-stop(0.5, #121a2e), to(#121a2e))');
+  }
+  
+  .mgwt-DropDownMenu .mgwt-HeaderButton-active .mgwt-HeaderButton-text {
+    background-image: literal('-webkit-gradient(linear, 0% 0%, 0% 100%, from(#5e636d), color-stop(0.5, #101628), color-stop(0.5, #00000e), to(#00000f) )');
+  }
+  
+  .mgwt-DropDownMenu .mgwt-HeaderButton-active .mgwt-HeaderButton-border-content {
+    background-image: literal('-webkit-gradient(linear, left top, right bottom, from(#5d626c),color-stop(0.5, #101729), color-stop(0.5, #00000e), to(#00000e))');
+    background-origin: border-box;
+  }
 }
+
+@if user.agent ie10 {
+	.mgwt-DropDownMenu .mgwt-HeaderButton .mgwt-HeaderButton-text {
+    background-image: linear-gradient(to bottom, #7d828c, #303749 50%, #121a2e 50%, #121a2e);
+    }
+	
+	.mgwt-DropDownMenu .mgwt-HeaderButton-active .mgwt-HeaderButton-text {
+    background-image: linear-gradient(to bottom, #5e636d, #101628 50%, #00000e 50%, #00000f);
+	}
+	
+	.mgwt-DropDownMenu .mgwt-HeaderButton-active .mgwt-HeaderButton-border-content {
+    background-image: linear-gradient(to bottom, #5d626c, #101729 50%, #00000e 50%, #00000e);
+		background-origin: border-box;
+	}
+}
+
 
 /* other browsers */
-@if user.agent ie6 ie8 ie9 ie10 gecko opera {
+@if user.agent ie6 ie8 ie9 gecko opera {
 	.mgwt-HeaderPanel-right {
 		
 	}

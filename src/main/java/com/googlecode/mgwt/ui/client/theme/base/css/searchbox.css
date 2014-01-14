@@ -55,6 +55,12 @@
 	}
 }
 
+@if user.agent ie10 {
+  .mgwt-SearchBox-input {
+    \-ms-user-select: text;
+  }
+}
+
 @if user.agent gecko1_8 {
 	.mgwt-SearchBox-input {
 		top: 5px;
@@ -64,7 +70,7 @@
 	}
 }
 
-@if user.agent ie9 ie10 {
+@if user.agent ie9 {
 	.mgwt-SearchBox-input {
 		top: 5px;
 	}

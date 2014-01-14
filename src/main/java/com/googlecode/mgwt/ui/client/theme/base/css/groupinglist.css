@@ -16,6 +16,12 @@
 	}
 }
 
+@if user.agent ie10 {
+  .mgwt-GroupingList {
+    display: -ms-flexbox;
+  }
+}
+
 @if user.agent gecko1_8 {
 	.mgwt-GroupingList {
 		display: \-moz-box;
@@ -47,6 +53,13 @@
 	}
 }
 
+@if user.agent ie10 {
+  .mgwt-GroupingList-Selection-Bar {
+    display: -ms-flexbox;
+    \-ms-flex-direction: column;
+  }
+}
+
 @if user.agent gecko1_8 {
 	.mgwt-GroupingList-Selection-Bar {
 		display: \-moz-box;
@@ -64,6 +77,12 @@
 	.mgwt-GroupingList-Selection-Bar > li{
 		\-webkit-box-flex: 1;
 	}
+}
+
+@if user.agent ie10 {
+  .mgwt-GroupingList-Selection-Bar > li{
+    \-ms-flex: 1;
+  }
 }
 
 @if user.agent gecko1_8 {

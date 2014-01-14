@@ -90,7 +90,7 @@ public interface MGWTClientBundleBaseThemeDesktop extends ClientBundle, MGWTClie
 	@Source({ "css/dialog.css", "css/ipad/dialog.css" })
 	DialogCss getDialogCss();
 
-	@Source("css/main.css")
+  @Source({ "css/main.css", "css/ipad/main.css" })
 	MainCss getMainCss();
 
 	@Source({ "css/input.css", "css/ipad/input.css" })

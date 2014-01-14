@@ -11,6 +11,7 @@ import com.googlecode.mgwt.ui.client.theme.base.MGWTClientBundleBaseThemeIPad;
 import com.googlecode.mgwt.ui.client.theme.base.MGWTClientBundleBaseThemeIPadRetina;
 import com.googlecode.mgwt.ui.client.theme.base.MGWTClientBundleBaseThemeIPhone;
 import com.googlecode.mgwt.ui.client.theme.base.MGWTClientBundleBaseThemeRetina;
+import com.googlecode.mgwt.ui.client.theme.base.MGWTClientBundleBaseThemeWindowsPhone;
 
 public class MGWTThemeBaseThemeStandardImpl implements MGWTTheme {
 
@@ -48,7 +49,9 @@ public class MGWTThemeBaseThemeStandardImpl implements MGWTTheme {
     if (detection.isBlackBerry()) {
       bundle = GWT.create(MGWTClientBundleBaseThemeBlackberry.class);
     }
-
+    if (detection.isWindowsPhone()) {
+      bundle = GWT.create(MGWTClientBundleBaseThemeWindowsPhone.class);
+    }
     if (detection.isDesktop()) {
       bundle = GWT.create(MGWTClientBundleBaseThemeDesktop.class);
     }

@@ -26,13 +26,19 @@
 	}
 }
 
-@if user.agent ie9 ie10 {
+@if user.agent ie9 {
 	.mgwt-ButtonBar {
 		display: table;
 		
 	}
 }
 
+@if user.agent ie10 {
+  .mgwt-ButtonBar {
+    display: \-ms-flexbox;
+    \-ms-flex-direction: row;
+  }
+}
 
 
 .mgwt-ButtonBar-text{
@@ -48,7 +54,7 @@
 	color: white;
 }
 
-@if user.agent ie9 ie10 {
+@if user.agent ie9 {
 	.mgwt-ButtonBar-text{
 		display: table-cell;
 		vertical-align: middle;
@@ -72,7 +78,13 @@
 	}
 }
 
-@if user.agent ie9 ie10 {
+@if user.agent ie10 {
+  .mgwt-ButtonBar-spacer{
+    \-ms-flex: 1;
+  }
+}
+
+@if user.agent ie9 {
 	.mgwt-ButtonBar-spacer{
 		display: table-cell;
 		width: 50%;

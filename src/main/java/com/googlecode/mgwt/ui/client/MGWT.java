@@ -26,6 +26,7 @@ import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Float;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.dom.client.StyleElement;
 import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
@@ -38,7 +39,6 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.RootPanel;
-
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeEvent;
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeEvent.ORIENTATION;
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeHandler;
@@ -91,11 +91,20 @@ public class MGWT {
    */
   public static void applySettings(MGWTSettings settings) {
 
+    Element head = getHead();
+
+    ViewPort viewPort = settings.getViewPort();
+
+    if (viewPort != null) {
+      MetaElement fixViewPortElement = Document.get().createMetaElement();
+      fixViewPortElement.setName("viewport");
+      fixViewPortElement.setContent(viewPort.getContent());
+      head.appendChild(fixViewPortElement);
+    }
+
     // This is a very nasty workaround because GWT CssResource does not
     // support @media correctly!
     StyleInjector.inject(MGWTStyle.getTheme().getMGWTClientBundle().utilTextResource().getText());
-
-    Element head = getHead();
 
     if (settings.getIconUrl() != null) {
 
@@ -118,16 +127,6 @@ public class MGWT {
       head.appendChild(startUrlLinkElement);
     }
 
-    ViewPort viewPort = settings.getViewPort();
-
-    if (viewPort != null) {
-      MetaElement fixViewPortElement = Document.get().createMetaElement();
-      fixViewPortElement.setName("viewport");
-      fixViewPortElement.setContent(viewPort.getContent());
-      head.appendChild(fixViewPortElement);
-
-    }
-
     if (settings.isFullscreen()) {
       MetaElement fullScreenMetaTag = Document.get().createMetaElement();
       fullScreenMetaTag.setName("apple-mobile-web-app-capable");
@@ -144,11 +143,33 @@ public class MGWT {
 
     }
 
+    if (MGWT.getOsDetection().isWindowsPhone())
+    {
+      MetaElement ieCompatible = Document.get().createMetaElement();
+      ieCompatible.setHttpEquiv("IE=edge");
+      
+      MetaElement tapHighlight = Document.get().createMetaElement();
+      tapHighlight.setName("msapplication-tap-highlight");
+      tapHighlight.setContent("no");
+      
+//      StyleElement styleElement = Document.get().createStyleElement();
+//      styleElement.setInnerText("@-ms-viewport {\n" + 
+//      		"  width: device-width;\n" + 
+//      		"}");
+
+      head.appendChild(tapHighlight);
+//      head.appendChild(styleElement);
+      head.appendChild(ieCompatible);
+    }
+
     scrollingDisabled = settings.isPreventScrolling();
     if (settings.isPreventScrolling() && getOsDetection().isIOs()) {
       BodyElement body = Document.get().getBody();
-      setupPreventScrolling(body);
-
+      setupPreventScrollingForIOS(body);
+    }
+    
+    if (settings.isPreventScrolling() && getOsDetection().isWindowsPhone()) {
+      Document.get().getBody().setAttribute("style", "-ms-touch-action: none;");
     }
 
     if (settings.isDisablePhoneNumberDetection()) {
@@ -308,6 +329,10 @@ public class MGWT {
     return elementsByTagName.getItem(0);
   }
 
+  private static Element getHTMLElement() {
+    return Document.get().getBody().getParentElement();
+  }
+
   private static native int getOrientation0()/*-{
 		if (typeof ($wnd.orientation) == 'undefined') {
 			return 0;
@@ -369,6 +394,9 @@ public class MGWT {
 		if (ua.indexOf('ipad') != -1) {
 			return true;
 		}
+    if (ua.indexOf('windows phone 8') != -1) {
+      return true;
+    }
 
 		return false;
   }-*/;
@@ -423,7 +451,7 @@ public class MGWT {
 		$doc.removeEventListener("orientationChanged", o);
   }-*/;
 
-  private static native void setupPreventScrolling(Element el)/*-{
+  private static native void setupPreventScrollingForIOS(Element el)/*-{
 		var func = function(event) {
 			event.preventDefault();
 			return false;

@@ -70,6 +70,10 @@ public class MgwtOsPropertyProvider extends PropertyProviderBaseImpl {
 
 		}
 
+    if (userAgent.contains("windows phone")) {
+      return "windows_phone";
+    }
+
 		if (userAgent.contains("blackberry")) {
 			return "blackberry";
 		}

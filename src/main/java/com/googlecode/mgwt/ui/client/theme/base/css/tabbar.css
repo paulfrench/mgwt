@@ -3,32 +3,47 @@
 	@external mgwt-TabBar-Button, mgwt-TabBar-Button-active, mgwt-TabBar-Button-selected, mgwt-TabBar-Button-icon, mgwt-TabBar-Button-text;
 }
 
-.mgwt-TabPanel{
-	display: \-webkit-box;
-	\-webkit-box-flex: 1;
-	\-webkit-box-orient: vertical;
-	width: 100%;
-	height: 100%;
-}
+@if !user.agent ie10 {  
+  .mgwt-TabPanel{
+  	display: \-webkit-box;
+  	\-webkit-box-flex: 1;
+  	\-webkit-box-orient: vertical;
+  	width: 100%;
+  	height: 100%;
+  }
+  
+  .mgwt-TabPanel-container{
+  	display: \-webkit-box;
+  	\-webkit-box-flex: 1;
+  	\-webkit-box-orient: vertical;
+  	overflow: hidden;
+  }
 
-.mgwt-TabPanel-container{
-	display: \-webkit-box;
-	\-webkit-box-flex: 1;
-	\-webkit-box-orient: vertical;
-	overflow: hidden;
+  .mgwt-TabBar {
+  	display: \-webkit-box;
+  	\-webkit-box-orient: horizontal;
+  }
 }
+@else {
+  .mgwt-TabPanel{
+    display: -ms-flexbox;
+    \-ms-flex: 1 0 auto;
+    \-ms-flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+  
+  .mgwt-TabPanel-container{
+    display: -ms-flexbox;
+    \-ms-flex: 1 0 auto;
+    \-ms-flex-direction: column;
+    overflow: hidden;
+  }
 
-.mgwt-TabBar {
-	
-	display: \-webkit-box;
-	\-webkit-box-orient: horizontal;
-}
-
-@if user.agent safari {
-	.mgwt-TabBar {
-		display: \-webkit-box;
-		\-webkit-box-orient: horizontal;
-	}
+  .mgwt-TabBar {
+    display: -ms-flexbox;
+    \-ms-flex-direction: row;
+  }
 }
 
 @if user.agent gecko1_8 {
@@ -58,6 +73,12 @@
 		\-webkit-appearance: none;
 		\-webkit-box-flex: 1;
 	}
+}
+
+@if user.agent ie10 {
+  .mgwt-TabBar-Button {
+    \-ms-flex: 1;
+  }
 }
 
 @if user.agent gecko1_8 {

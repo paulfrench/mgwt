@@ -17,18 +17,24 @@
 	\-moz-appearance: none;
 	\-webkit-user-select: text;
 	\-moz-user-select: text;
+	\-ms-user-select: text;
+	/* for ie10 for tap-highlight we can only remove for entire page via <meta name="msapplication-tap-highlight" content="no" /> in header */
 	\-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	\-webkit-user-modify: read-write-plaintext-only;
 }
-
-
-
 
 @if user.agent safari {
 	.mgwt-TextBox .mgwt-InputBox-box,.mgwt-PasswordTextBox .mgwt-InputBox-box,.mgwt-TextArea .mgwt-InputBox-box {
 		display: -webkit-box;
 		\-webkit-box-flex: 1;
 	}
+}
+
+@if user.agent ie10 {
+  .mgwt-TextBox .mgwt-InputBox-box,.mgwt-PasswordTextBox .mgwt-InputBox-box,.mgwt-TextArea .mgwt-InputBox-box {
+    display: -ms-flexbox;
+    \-ms-flex: 1;
+  }
 }
 
 @if user.agent gecko1_8 {
@@ -50,6 +56,13 @@
 		display: -webkit-box;
 		\-webkit-box-flex: 1;
 	}
+}
+
+@if user.agent ie10 {
+  .mgwt-TextBox,.mgwt-PasswordTextBox,.mgwt-TextArea {
+    display: -ms-flexbox;
+    \-ms-flex: 1;
+  }
 }
 
 @if user.agent gecko1_8 {
@@ -75,6 +88,18 @@
 		display: \-webkit-box;
 		\-webkit-box-flex: 1;
 	}
+}
+
+@if user.agent ie10 {
+  .mgwt-RadioButton {
+    display: -ms-flexbox;
+    \-ms-flex-direction: row;
+    \-ms-flex: 1;
+  }
+  .mgwt-RadioButton>label {
+    display: -ms-flexbox;
+    \-ms-flex: 1;
+  }
 }
 
 @if user.agent gecko1_8 {
@@ -115,6 +140,13 @@
 		\-webkit-appearance: none;
 		\-webkit-user-select: text;
 	}
+}
+
+@if user.agent ie10 {
+  .mgwt-ListBox {
+    display: -ms-flexbox;
+    \-ms-user-select: text;
+  }
 }
 
 @if user.agent gecko1_8 {

@@ -120,7 +120,7 @@ public interface OsDetection {
 	 * Are we running on a phone
 	 * 
 	 * @return true if we are running on any kind of phone (iphone, ipod touch,
-	 *         android phone, blackberry), otherwise false
+   *         android phone, blackberry, windows phone 8), otherwise false
 	 */
 	public boolean isPhone();
 
@@ -130,5 +130,11 @@ public interface OsDetection {
 	 * @return true if running on a blackberry device, otherwise false
 	 */
 	public boolean isBlackBerry();
+  
+  /**
+   * Are we running on Windows Phone 8
+   * @return
+   */
+  public boolean isWindowsPhone();
 
 }

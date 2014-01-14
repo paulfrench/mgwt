@@ -27,29 +27,46 @@ under * the License.
 	<replace-with class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetDesktopImpl">
 		<when-type-is class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl" />
 		<all>
+            <none>
+                <when-property-is name="user.agent" value="ie10"/>
+            </none>
 			<when-property-is name="mobile.user.agent" value="not_mobile" />
 		</all>
 	</replace-with>
 	<replace-with class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetMobileImpl">
 		<when-type-is class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl" />
 		<all>
+            <none>
+                <when-property-is name="user.agent" value="ie10"/>
+            </none>
 			<when-property-is name="mobile.user.agent" value="mobilesafari" />
 		</all>
 	</replace-with>
+  <replace-with class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetIE10Impl">
+    <when-type-is class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl" />
+    <all>
+      <when-property-is name="user.agent" value="ie10"/>
+    </all>
+  </replace-with>
 	
 		
 	<replace-with class="com.googlecode.mgwt.ui.client.widget.impl.ScrollPanelTouchImpl">
 		<when-type-is class="com.googlecode.mgwt.ui.client.widget.impl.ScrollPanelImpl" />
 	</replace-with>
 	
+  <replace-with class="com.googlecode.mgwt.ui.client.widget.impl.ScrollPanelTouchImpl">
+    <when-type-is class="com.googlecode.mgwt.ui.client.widget.impl.ScrollPanelImpl" />
+    <all>
+      <when-property-is name="user.agent" value="ie10"/>
+    </all>
+  </replace-with>
 	
 	
 	<replace-with class="com.googlecode.mgwt.ui.client.widget.impl.ScrollPanelIE9Impl">
 		<when-type-is class="com.googlecode.mgwt.ui.client.widget.impl.ScrollPanelImpl" />
-		 <any> 
+		 <all> 
    			<when-property-is name="user.agent" value="ie9" />
-			<when-property-is name="user.agent" value="ie10" />
-  		</any>
+  		</all>
 		
 	</replace-with>
 	
@@ -91,12 +108,19 @@ under * the License.
 	
 	<replace-with class="com.googlecode.mgwt.ui.client.util.impl.CssUtilIE9Impl">
 		<when-type-is class="com.googlecode.mgwt.ui.client.util.impl.CssUtilImpl" />
-		 <any> 
+		 <all> 
    			<when-property-is name="user.agent" value="ie9" />
-			<when-property-is name="user.agent" value="ie10" />
-  		</any>
+  		</all>
 		
 	</replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.util.impl.CssUtilIE10Impl">
+    <when-type-is class="com.googlecode.mgwt.ui.client.util.impl.CssUtilImpl" />
+     <all> 
+        <when-property-is name="user.agent" value="ie10" />
+      </all>
+    
+  </replace-with>
 	
 	<replace-with class="com.googlecode.mgwt.ui.client.util.impl.OperaCssUtilImpl">
 		<when-type-is class="com.googlecode.mgwt.ui.client.util.impl.CssUtilImpl" />
@@ -139,10 +163,9 @@ under * the License.
 	
 	<replace-with class="com.googlecode.mgwt.ui.client.widget.base.MValueBoxBase.MValueBoxBaseNoOpImpl">
 		<when-type-is class="com.googlecode.mgwt.ui.client.widget.base.MValueBoxBase.MValueBoxBaseImpl" />
-		<any> 
+		<all> 
    			<when-property-is name="user.agent" value="ie9" />
-			<when-property-is name="user.agent" value="ie10" />
-  		</any>
+  		</all>
 	</replace-with>
 	<replace-with class="com.googlecode.mgwt.ui.client.widget.base.MValueBoxBase.MValueBoxBaseNoOpImpl">
 		<when-type-is class="com.googlecode.mgwt.ui.client.widget.base.MValueBoxBase.MValueBoxBaseImpl" />
@@ -150,6 +173,13 @@ under * the License.
    			<when-property-is name="mobile.user.agent" value="not_mobile" />
   		</all>
 	</replace-with>
+
+  <replace-with class="com.googlecode.mgwt.ui.client.widget.base.MValueBoxBase.MValueBoxBaseDefaultImpl">
+    <when-type-is class="com.googlecode.mgwt.ui.client.widget.base.MValueBoxBase.MValueBoxBaseImpl" />
+    <all> 
+        <when-property-is name="user.agent" value="ie10" />
+      </all>
+  </replace-with>
 	
 	<!-- Carousel -->
 	<replace-with class="com.googlecode.mgwt.ui.client.widget.Carousel.CarouselImplSafari">

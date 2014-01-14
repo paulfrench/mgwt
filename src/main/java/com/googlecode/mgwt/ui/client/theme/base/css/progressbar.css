@@ -38,6 +38,25 @@
 
 }
 
+@if user.agent ie10 {
+  .mgwt-ProgressBar {
+    animation-duration: 9s;
+    animation-name: anmiateProgressBar;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  
+  @keyframes anmiateProgressBar {
+    
+        0% { background-position-x:  0%; }
+    
+        100% { background-position-x: 100%; }
+    
+  }
+
+}
+
 
 @if user.agent gecko1_8 {
 

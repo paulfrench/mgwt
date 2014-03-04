@@ -17,6 +17,7 @@ package com.googlecode.mgwt.ui.client.widget.touch;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.mgwt.dom.client.event.mouse.HandlerRegistrationCollection;
 import com.googlecode.mgwt.dom.client.event.pointer.MsPointerCancelEvent;
 import com.googlecode.mgwt.dom.client.event.pointer.MsPointerDownEvent;
 import com.googlecode.mgwt.dom.client.event.pointer.MsPointerMoveEvent;
@@ -53,7 +54,12 @@ public class TouchWidgetIE10Impl implements TouchWidgetImpl {
 	/** {@inheritDoc} */
 	@Override
 	public HandlerRegistration addTouchMoveHandler(Widget w, TouchMoveHandler handler) {
-		return w.addBitlessDomHandler(new TouchMoveToMsPointerMoveHandler(handler), MsPointerMoveEvent.getType());
+	  TouchMoveToMsPointerMoveHandler touchMoveToMsPointerMoveHandler = new TouchMoveToMsPointerMoveHandler(handler);
+    HandlerRegistrationCollection handlerRegistrationCollection = new HandlerRegistrationCollection();
+    handlerRegistrationCollection.addHandlerRegistration(w.addBitlessDomHandler(touchMoveToMsPointerMoveHandler, MsPointerDownEvent.getType()));
+    handlerRegistrationCollection.addHandlerRegistration(w.addBitlessDomHandler(touchMoveToMsPointerMoveHandler, MsPointerUpEvent.getType()));
+    handlerRegistrationCollection.addHandlerRegistration(w.addBitlessDomHandler(touchMoveToMsPointerMoveHandler, MsPointerMoveEvent.getType()));
+		return handlerRegistrationCollection;
 	}
 
 	/*

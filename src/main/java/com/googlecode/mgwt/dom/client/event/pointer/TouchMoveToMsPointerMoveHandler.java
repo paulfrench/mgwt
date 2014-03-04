@@ -15,13 +15,16 @@
  */
 package com.googlecode.mgwt.dom.client.event.pointer;
 
+import com.googlecode.mgwt.dom.client.event.pointer.SimulatedTouchMoveEvent;
 import com.googlecode.mgwt.dom.client.event.touch.TouchMoveHandler;
 
 /**
- * Convert TouchMoveHandlers to MsPointerMoveHandlers
+ * Convert TouchMoveHandlers to MsPointerMoveHandlers for pointer devices
+ *
  */
-public class TouchMoveToMsPointerMoveHandler implements MsPointerMoveHandler {
+public class TouchMoveToMsPointerMoveHandler implements MsPointerMoveHandler, MsPointerDownHandler, MsPointerUpHandler {
 
+  private boolean ignoreEvent;
 	private final TouchMoveHandler touchMoveHandler;
 
 	/**
@@ -31,12 +34,27 @@ public class TouchMoveToMsPointerMoveHandler implements MsPointerMoveHandler {
 	 */
 	public TouchMoveToMsPointerMoveHandler(TouchMoveHandler touchMoveHandler) {
 		this.touchMoveHandler = touchMoveHandler;
+    ignoreEvent = true;
 	}
 
 	/** {@inheritDoc} */
 	@Override
   public void onPointerMove(MsPointerMoveEvent event) {
+    if (ignoreEvent)
+      return;
 		touchMoveHandler.onTouchMove(new SimulatedTouchMoveEvent(event));
 	}
+
+  @Override
+  public void onPointerUp(MsPointerUpEvent event)
+  {
+    ignoreEvent = true;
+  }
+
+  @Override
+  public void onPointerDown(MsPointerDownEvent event)
+  {
+    ignoreEvent = false;
+  }
 
 }

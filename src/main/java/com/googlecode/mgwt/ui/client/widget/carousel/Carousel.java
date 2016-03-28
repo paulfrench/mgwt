@@ -250,8 +250,8 @@ public class Carousel extends Composite implements HasWidgets, HasSelectionHandl
       public void onScrollEnd(ScrollEndEvent event) {
         int page = scrollPanel.getCurrentPageX();
 
-        carouselIndicatorContainer.setSelectedIndex(page);
         currentPage = page;
+        // Selection handler updates carousel indicator, so no need to update it here
         SelectionEvent.fire(Carousel.this, currentPage);
 
       }
@@ -377,9 +377,8 @@ public class Carousel extends Composite implements HasWidgets, HasSelectionHandl
 
         if (currentPage >= widgetCount) {
           currentPage = widgetCount - 1;
+          carouselIndicatorContainer.setSelectedIndex(currentPage);
         }
-
-        carouselIndicatorContainer.setSelectedIndex(currentPage);
 
         refreshHandler = scrollPanel.addScrollRefreshHandler(new ScrollRefreshEvent.Handler() {
 

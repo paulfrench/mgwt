@@ -13,6 +13,12 @@
  */
 package com.googlecode.mgwt.ui.client.widget.carousel;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Unit;
@@ -46,12 +52,6 @@ import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollMoveEvent;
 import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
 import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollRefreshEvent;
 import com.googlecode.mgwt.ui.client.widget.touch.TouchWidget;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * A carousel renders its children in a row.
@@ -498,7 +498,9 @@ public class Carousel extends Composite implements HasWidgets, HasSelectionHandl
   public void setSupportCarouselIndicatorTap(boolean supportCarouselIndicatorTap) {
     if (supportCarouselIndicatorTap != this.supportCarouselIndicatorTap) {
         this.supportCarouselIndicatorTap = supportCarouselIndicatorTap;
-        carouselIndicatorContainer.setHandleTapEvent(supportCarouselIndicatorTap);
+        if (carouselIndicatorContainer != null) {
+            carouselIndicatorContainer.setHandleTapEvent(supportCarouselIndicatorTap);
+        }
     }
   }
   

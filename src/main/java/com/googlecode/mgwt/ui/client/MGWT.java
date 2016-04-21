@@ -375,4 +375,7 @@ public class MGWT {
     return manager;
   }
 
+  public static native void log(String message)/*-{
+    $wnd.console.log(message);
+  }-*/;
 }

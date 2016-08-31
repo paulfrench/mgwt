@@ -31,14 +31,14 @@ public class DOMImplIE10 extends DOMImplIE9 {
   
   /**
    * Lets have the same behaviour as IOS where the target element continues to receive Pointer events
-   * even when the pointer has moved off the element up until MSPointerUp has occurred.
+   * even when the pointer has moved off the element up until PointerUp has occurred.
    * 
    *  Do not do pointer capture on input or textarea elements, all sorts of problems arise if you do!
    *  For example if you type into a password field you cannot set the cursor to the end of
    *  the text when re-entering it and so you cannot edit your password
    */
   private native static void capturePointerEvents() /*-{
-    if ($wnd.navigator.pointerEnabled) {
+    if ($wnd.PointerEvent) {
       $wnd.addEventListener('pointerdown',
         $entry(function(evt) {
           if ((evt.target.tagName !== 'INPUT') && (evt.target.tagName !== 'TEXTAREA'))  {
@@ -58,7 +58,7 @@ public class DOMImplIE10 extends DOMImplIE9 {
 
   
   public static native JavaScriptObject getCaptureEventDispatchers() /*-{
-    if ($wnd.navigator.pointerEnabled) {
+    if ($wnd.PointerEvent) {
       return {
         pointerdown:   @com.google.gwt.user.client.impl.DOMImplStandard::dispatchCapturedMouseEvent(*),
         pointerup:     @com.google.gwt.user.client.impl.DOMImplStandard::dispatchCapturedMouseEvent(*),
@@ -77,7 +77,7 @@ public class DOMImplIE10 extends DOMImplIE9 {
   }-*/;
 
   public static native JavaScriptObject getBitlessEventDispatchers() /*-{
-    if ($wnd.navigator.pointerEnabled) {
+    if ($wnd.PointerEvent) {
       return {
         pointerdown:   @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent(*),
         pointerup:     @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent(*),

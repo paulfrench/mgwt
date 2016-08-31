@@ -30,8 +30,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.mgwt.dom.client.event.mouse.SimulatedTouchEndEvent;
+import com.googlecode.mgwt.dom.client.event.mouse.SimulatedTouchStartEvent;
 import com.googlecode.mgwt.dom.client.event.touch.TouchHandler;
-import com.googlecode.mgwt.ui.client.TouchSupport;
 import com.googlecode.mgwt.ui.client.util.CssUtil;
 import com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl;
 
@@ -49,7 +50,7 @@ public class Slider extends Widget implements HasValue<Integer>, LeafValueEditor
     @Override
     public void onTouchStart(TouchStartEvent event) {
       setValueContrained(event.getTouches().get(0).getClientX());
-      if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
+      if (event instanceof SimulatedTouchStartEvent) {
         DOM.setCapture(getElement());
       }
       active = true;
@@ -68,7 +69,7 @@ public class Slider extends Widget implements HasValue<Integer>, LeafValueEditor
 
     @Override
     public void onTouchEnd(TouchEndEvent event) {
-      if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
+      if (event instanceof SimulatedTouchEndEvent) {
         DOM.releaseCapture(getElement());
       }
       event.stopPropagation();
@@ -78,9 +79,6 @@ public class Slider extends Widget implements HasValue<Integer>, LeafValueEditor
 
     @Override
     public void onTouchCancel(TouchCancelEvent event) {
-      if (TouchSupport.isTouchEventsEmulatedUsingMouseEvents()) {
-        DOM.releaseCapture(getElement());
-      }
       active = false;
     }
   }

@@ -17,14 +17,16 @@ public class DOMImplWebkitPointer extends DOMImplWebkit
    * Lets have the same behaviour as IOS where the target element continues to receive Pointer events
    * even when the pointer has moved off the element up until PointerUp has occurred.
    * 
-   *  Do not do pointer capture on input or textarea elements, all sorts of problems arise if you do!
+   *  Do not do pointer capture on native browser input elements, all sorts of problems arise if you do!
    *  For example if you type into a password field you cannot set the cursor to the end of
-   *  the text when re-entering it and so you cannot edit your password
+   *  the text when re-entering it and so you cannot edit your password.
+   *  See issue 286 for an explanation why it is a problem doing pointer capture on a select element
+   *  in ie edge mobile.
    */
   private native static void capturePointerEvents() /*-{
     $wnd.addEventListener('pointerdown',
       $entry(function(evt) {
-        if ((evt.target.tagName !== 'INPUT') && (evt.target.tagName !== 'TEXTAREA'))  {
+        if ((evt.target.tagName !== 'INPUT') && (evt.target.tagName !== 'TEXTAREA') && (evt.target.tagName !== 'SELECT'))  {
           evt.target.setPointerCapture(evt.pointerId);
         }
       }), true);

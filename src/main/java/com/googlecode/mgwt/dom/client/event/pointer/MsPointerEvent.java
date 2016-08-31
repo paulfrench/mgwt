@@ -25,7 +25,7 @@ import com.google.gwt.event.shared.EventHandler;
 public abstract class MsPointerEvent<H extends EventHandler> extends MouseEvent<H> {
 
   private native static boolean isIE10PointerEventModel() /*-{
-    return (!$wnd.navigator.pointerEnabled);
+    return (!$wnd.PointerEvent);
   }-*/;
 
   public static final String MSPOINTERDOWN;
